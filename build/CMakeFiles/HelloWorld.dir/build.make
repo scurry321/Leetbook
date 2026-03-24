@@ -69,28 +69,28 @@ include CMakeFiles/HelloWorld.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/HelloWorld.dir/flags.make
 
-CMakeFiles/HelloWorld.dir/src/22.cpp.o: CMakeFiles/HelloWorld.dir/flags.make
-CMakeFiles/HelloWorld.dir/src/22.cpp.o: ../src/22.cpp
-CMakeFiles/HelloWorld.dir/src/22.cpp.o: CMakeFiles/HelloWorld.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lxh/Project/Leetbook/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/HelloWorld.dir/src/22.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HelloWorld.dir/src/22.cpp.o -MF CMakeFiles/HelloWorld.dir/src/22.cpp.o.d -o CMakeFiles/HelloWorld.dir/src/22.cpp.o -c /home/lxh/Project/Leetbook/src/22.cpp
+CMakeFiles/HelloWorld.dir/src/32.cpp.o: CMakeFiles/HelloWorld.dir/flags.make
+CMakeFiles/HelloWorld.dir/src/32.cpp.o: ../src/32.cpp
+CMakeFiles/HelloWorld.dir/src/32.cpp.o: CMakeFiles/HelloWorld.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lxh/Project/Leetbook/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/HelloWorld.dir/src/32.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/HelloWorld.dir/src/32.cpp.o -MF CMakeFiles/HelloWorld.dir/src/32.cpp.o.d -o CMakeFiles/HelloWorld.dir/src/32.cpp.o -c /home/lxh/Project/Leetbook/src/32.cpp
 
-CMakeFiles/HelloWorld.dir/src/22.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HelloWorld.dir/src/22.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lxh/Project/Leetbook/src/22.cpp > CMakeFiles/HelloWorld.dir/src/22.cpp.i
+CMakeFiles/HelloWorld.dir/src/32.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HelloWorld.dir/src/32.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lxh/Project/Leetbook/src/32.cpp > CMakeFiles/HelloWorld.dir/src/32.cpp.i
 
-CMakeFiles/HelloWorld.dir/src/22.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HelloWorld.dir/src/22.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lxh/Project/Leetbook/src/22.cpp -o CMakeFiles/HelloWorld.dir/src/22.cpp.s
+CMakeFiles/HelloWorld.dir/src/32.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HelloWorld.dir/src/32.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lxh/Project/Leetbook/src/32.cpp -o CMakeFiles/HelloWorld.dir/src/32.cpp.s
 
 # Object files for target HelloWorld
 HelloWorld_OBJECTS = \
-"CMakeFiles/HelloWorld.dir/src/22.cpp.o"
+"CMakeFiles/HelloWorld.dir/src/32.cpp.o"
 
 # External object files for target HelloWorld
 HelloWorld_EXTERNAL_OBJECTS =
 
-HelloWorld: CMakeFiles/HelloWorld.dir/src/22.cpp.o
+HelloWorld: CMakeFiles/HelloWorld.dir/src/32.cpp.o
 HelloWorld: CMakeFiles/HelloWorld.dir/build.make
 HelloWorld: CMakeFiles/HelloWorld.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lxh/Project/Leetbook/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable HelloWorld"

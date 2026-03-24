@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/lxh/Project/Leetbook/src/22.cpp" "CMakeFiles/HelloWorld.dir/src/22.cpp.o" "gcc" "CMakeFiles/HelloWorld.dir/src/22.cpp.o.d"
+  "/home/lxh/Project/Leetbook/src/32.cpp" "CMakeFiles/HelloWorld.dir/src/32.cpp.o" "gcc" "CMakeFiles/HelloWorld.dir/src/32.cpp.o.d"
   )
 
 # Targets to which this target links.
