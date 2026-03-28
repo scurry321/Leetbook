@@ -5,7 +5,7 @@
 --              4096 entries, 12-bit signed output, range -2047 to +2047.
 --              Designed for DDS (Direct Digital Synthesis) waveform generation.
 -- Author:      Auto-generated for FPGA Arbitrary Waveform Generator
--- Target:      Quartus 18.0 / ModelSim 10.4, VHDL-93
+-- Target:      Quartus 18.0 / ModelSim 10.4 (VHDL-93 / VHDL-2008)
 ----------------------------------------------------------------------------
 
 library ieee;

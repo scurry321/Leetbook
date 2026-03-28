@@ -20,7 +20,10 @@
 --   DAC output -2047 -> -10V
 --
 -- Author:      Auto-generated for FPGA Arbitrary Waveform Generator
--- Target:      Quartus 18.0 / ModelSim 10.4, VHDL-93
+-- Target:      Quartus 18.0 / ModelSim 10.4 (VHDL-93 / VHDL-2008)
+--
+-- Note:        All waveform peaks are symmetric at ±2047 (not -2048/+2047)
+--              to avoid DC offset in the output signal.
 ----------------------------------------------------------------------------
 
 library ieee;
