@@ -1,5 +1,17 @@
 # FPGA DDS 任意波形发生器 — Quartus 18.0 + ModelSim 10.4 仿真指南
 
+> **🚀 第一次用？先看 [QUICK_START.md](QUICK_START.md) — 5 分钟跑出波形！**
+
+## 你现在应该做什么（速览）
+
+```
+打开 ModelSim → cd {你的路径/fpga_waveform_generator/sim} → do run_sim.do → 看波形
+```
+
+就这 3 步。详细操作见 [QUICK_START.md](QUICK_START.md) 或下面的「方法一」。
+
+---
+
 ## 目录
 
 1. [项目概述](#1-项目概述)
@@ -10,6 +22,7 @@
 6. [仿真波形解读](#6-仿真波形解读)
 7. [常见问题与排错](#7-常见问题与排错)
 8. [频率调节对照表](#8-频率调节对照表)
+9. [如何集成到你已有的 Quartus 工程](#9-如何集成到你已有的-quartus-工程)
 
 ---
 
@@ -390,6 +403,8 @@ FTW = round(f_out × 2^32 / 50000000)
 
 ## 快速启动 (Quick Start)
 
+> **👉 更详细的快速启动指南请看 [QUICK_START.md](QUICK_START.md)**
+
 如果你只想尽快看到波形，只需要执行以下 **两步**：
 
 **第 1 步**：打开 ModelSim，在 Transcript 窗口输入：
@@ -403,6 +418,56 @@ do run_sim.do
 ```
 
 **完成！** 等待约 10 秒后，Wave 窗口会显示所有波形。
+
+---
+
+## 9. 如何集成到你已有的 Quartus 工程
+
+> 如果你已经有一个 DDS 波形发生器的 Quartus 工程，想把这里的仿真文件与你的工程配合使用。
+
+### 场景 A：你的工程里已有自己的 VHDL 源文件
+
+如果你已经有自己编写的 `dds_waveform_gen.vhd` 等源文件，你只需要：
+
+1. **复制 `sim/` 文件夹** 到你的 Quartus 工程目录下：
+   ```
+   你的工程目录/
+   ├── 你的源文件.vhd
+   ├── 你的工程.qpf
+   └── sim/                          ← 复制到这里
+       ├── tb_dds_waveform_gen.vhd
+       └── run_sim.do
+   ```
+
+2. **修改 testbench**：打开 `sim/tb_dds_waveform_gen.vhd`，把 DUT 实例化部分改为你自己的顶层模块名和端口
+
+3. **修改 `run_sim.do`**：把编译路径改为指向你自己的源文件
+   ```tcl
+   # 改成你自己的文件路径
+   vcom -2008 -work work ../你的源文件1.vhd
+   vcom -2008 -work work ../你的源文件2.vhd
+   vcom -2008 -work work ./tb_dds_waveform_gen.vhd
+   ```
+
+### 场景 B：你想直接使用本项目提供的源文件
+
+1. **打开 Quartus**，打开你的工程
+2. 菜单 **Project** → **Add/Remove Files in Project...**
+3. 添加以下两个文件：
+   - `fpga_waveform_generator/src/sine_lut.vhd`
+   - `fpga_waveform_generator/src/dds_waveform_gen.vhd`
+4. 点击 **OK**
+5. 在 Quartus 中重新编译：**Processing** → **Start Compilation**
+6. 编译成功后，按照上面「方法一」或「方法二」运行仿真
+
+### 场景 C：你只想仿真，不改动 Quartus 工程
+
+直接按照「方法一」操作：
+```tcl
+cd {你的路径/fpga_waveform_generator/sim}
+do run_sim.do
+```
+这个方式完全独立于 Quartus，不需要修改你的工程。
 
 ---
 

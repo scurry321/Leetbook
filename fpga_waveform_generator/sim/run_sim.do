@@ -17,34 +17,63 @@
 #   - Zoom the waveform window to show all results
 # ===========================================================================
 
+puts "============================================"
+puts "  DDS Waveform Generator - ModelSim Setup   "
+puts "============================================"
+puts ""
+puts "  Current directory: [pwd]"
+puts ""
+
 # --- Step 1: Create/clean work library ---
+puts "Step 1/6: Creating work library..."
 if {[file exists work]} {
     vdel -all -lib work
 }
 vlib work
 vmap work work
 
-# --- Step 2: Compile VHDL sources (order matters) ---
-# Note: Using -2008 for VHDL-2008 standard (supported by ModelSim 10.4).
-#       If you encounter issues, try changing -2008 to -93.
+# --- Step 2: Verify source files exist ---
+puts "Step 2/6: Checking source files..."
+set src_files [list ../src/sine_lut.vhd ../src/dds_waveform_gen.vhd ./tb_dds_waveform_gen.vhd]
+foreach f $src_files {
+    if {![file exists $f]} {
+        puts ""
+        puts "ERROR: File not found: $f"
+        puts ""
+        puts "  Please make sure you are in the correct directory."
+        puts "  Your current directory is: [pwd]"
+        puts "  Expected directory: fpga_waveform_generator/sim/"
+        puts ""
+        puts "  Fix: cd {your_path/fpga_waveform_generator/sim}"
+        puts ""
+        error "Source file not found: $f"
+    }
+}
+puts "  All source files found."
 
-# Compile the sine lookup table first (dependency of top module)
-vcom -2008 -work work ../src/sine_lut.vhd
+# --- Step 3: Compile VHDL sources (order matters) ---
+puts "Step 3/6: Compiling VHDL sources..."
 
-# Compile the top-level DDS waveform generator
-vcom -2008 -work work ../src/dds_waveform_gen.vhd
+# Try VHDL-2008 first; if it fails, fall back to VHDL-93
+set vhdl_std "-2008"
+if {[catch {vcom $vhdl_std -work work ../src/sine_lut.vhd} errmsg]} {
+    puts "  VHDL-2008 failed, trying VHDL-93..."
+    set vhdl_std "-93"
+    vcom $vhdl_std -work work ../src/sine_lut.vhd
+}
 
-# Compile the testbench
-vcom -2008 -work work ./tb_dds_waveform_gen.vhd
+vcom $vhdl_std -work work ../src/dds_waveform_gen.vhd
+vcom $vhdl_std -work work ./tb_dds_waveform_gen.vhd
 
-puts "=== Compilation complete ==="
+puts "  Compilation complete (using VHDL standard: $vhdl_std)"
 
-# --- Step 3: Load the testbench ---
+# --- Step 4: Load the testbench ---
+puts "Step 4/6: Loading testbench..."
 vsim -t ns work.tb_dds_waveform_gen
+puts "  Testbench loaded."
 
-puts "=== Testbench loaded ==="
-
-# --- Step 4: Add signals to waveform window ---
+# --- Step 5: Add signals to waveform window ---
+puts "Step 5/6: Configuring waveform display..."
 
 # Clock and reset
 add wave -divider "===== Clock & Reset ====="
@@ -85,16 +114,16 @@ add wave -label "Voltage (V)" \
     -min -10.0 \
     /tb_dds_waveform_gen/dac_voltage
 
-puts "=== Waveform signals added ==="
+puts "  Waveform signals added."
 
-# --- Step 5: Run simulation ---
-puts "=== Starting simulation (approx. 2.7 ms) ==="
-puts "=== Please wait... ==="
+# --- Step 6: Run simulation ---
+puts "Step 6/6: Running simulation (approx. 2.7 ms)..."
+puts "  Please wait..."
 run 3 ms
 
-puts "=== Simulation complete ==="
+puts ""
 
-# --- Step 6: Zoom waveform to show all data ---
+# --- Zoom waveform to show all data ---
 wave zoom full
 
 puts "============================================"
