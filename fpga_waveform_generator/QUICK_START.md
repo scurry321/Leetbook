@@ -131,6 +131,7 @@ do run_sim.do
 
 ### 接下来你可以做的事情：
 
+- **想直接下板到 FPGA 实验箱，用示波器看真实波形？** → 🔧 **查看 [HARDWARE_GUIDE.md](HARDWARE_GUIDE.md)**
 - **想看不同频率的波形？** → 查看 `README_simulation_guide.md` 的频率对照表（第 8 节）
 - **想从 Quartus 直接启动仿真？** → 查看 `README_simulation_guide.md` 的方法二（第 5 节）
 - **想把这些代码集成到你已有的工程？** → 把 `src/` 下两个 `.vhd` 文件添加到你的 Quartus 工程即可

@@ -1,14 +1,22 @@
 # FPGA DDS 任意波形发生器 — Quartus 18.0 + ModelSim 10.4 仿真指南
 
-> **🚀 第一次用？先看 [QUICK_START.md](QUICK_START.md) — 5 分钟跑出波形！**
+> **🚀 第一次用？先看 [QUICK_START.md](QUICK_START.md) — 5 分钟跑出仿真波形！**
+>
+> **🔧 仿真完了想下板看真实波形？看 [HARDWARE_GUIDE.md](HARDWARE_GUIDE.md) — Quartus 编译→下载→示波器显示！**
 
 ## 你现在应该做什么（速览）
 
+**想先仿真？**
 ```
 打开 ModelSim → cd {你的路径/fpga_waveform_generator/sim} → do run_sim.do → 看波形
 ```
-
 就这 3 步。详细操作见 [QUICK_START.md](QUICK_START.md) 或下面的「方法一」。
+
+**想直接下板？**
+```
+创建 Quartus 工程 → 添加 4 个 VHDL 文件 → 分配引脚 → 编译 → 下载 → 接示波器
+```
+详细操作见 [HARDWARE_GUIDE.md](HARDWARE_GUIDE.md)。
 
 ---
 
@@ -65,9 +73,15 @@ fpga_waveform_generator/
 ├── src/                              ← VHDL 源代码（综合 + 仿真均可用）
 │   ├── sine_lut.vhd                  ← 正弦波查找表 ROM（4096 点 × 12-bit）
 │   └── dds_waveform_gen.vhd          ← DDS 波形发生器顶层模块
+├── hw/                               ← 硬件下板文件（用于 FPGA 实物验证）
+│   ├── waveform_gen_top.vhd          ← 硬件顶层模块（引脚接口+按键+DAC）
+│   ├── key_debounce.vhd              ← 按键消抖模块
+│   └── pin_assignment_example.tcl    ← Quartus 引脚分配脚本（示例）
 ├── sim/                              ← 仿真文件（仅用于 ModelSim 仿真）
 │   ├── tb_dds_waveform_gen.vhd       ← 测试平台（Testbench）
 │   └── run_sim.do                    ← ModelSim 自动化脚本
+├── HARDWARE_GUIDE.md                 ← 硬件下板完整指南
+├── QUICK_START.md                    ← 仿真快速启动指南
 └── README_simulation_guide.md        ← 本文件（仿真指南）
 ```
 
@@ -76,7 +90,10 @@ fpga_waveform_generator/
 | 文件 | 作用 |
 |------|------|
 | `sine_lut.vhd` | 正弦波 ROM 查找表，使用 `MATH_REAL` 库在编译时自动计算 4096 个正弦值 |
-| `dds_waveform_gen.vhd` | 顶层模块：相位累加器 + 正弦/三角/方波生成 + 波形选择 + 幅度控制 |
+| `dds_waveform_gen.vhd` | DDS 核心：相位累加器 + 正弦/三角/方波生成 + 波形选择 + 幅度控制 |
+| `waveform_gen_top.vhd` | 硬件顶层：包装 DDS 核心，提供物理引脚接口（按钮、开关、DAC、LED）|
+| `key_debounce.vhd` | 按键消抖：过滤机械抖动，输出单脉冲 |
+| `pin_assignment_example.tcl` | Quartus 引脚分配脚本（需要根据你的板子修改引脚号）|
 | `tb_dds_waveform_gen.vhd` | 测试平台：自动生成时钟、复位，依次输出各种波形供仿真查看 |
 | `run_sim.do` | ModelSim 脚本：一键编译、加载、配置波形显示、运行仿真 |
 
