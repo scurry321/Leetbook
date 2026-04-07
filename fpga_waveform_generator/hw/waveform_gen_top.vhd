@@ -285,7 +285,7 @@ begin
     begin
         if RST_N = '0' then
             dac_wr_cnt <= (others => '0');
-        elsif rising_edge(clk_50m) then
+        elsif rising_edge(CLK_50M) then
             dac_wr_cnt <= dac_wr_cnt + 1;
         end if;
     end process;
